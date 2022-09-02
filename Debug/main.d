@@ -1,7 +1,7 @@
 # FIXED
 
 main.obj: ../main.c
-main.obj: D:/1.Coding_/Tiva/SCB.h
+main.obj: ../SCB.h
 main.obj: C:/ti/ccs1200/ccs/tools/compiler/ti-cgt-arm_20.2.6.LTS/include/stdint.h
 main.obj: C:/ti/ccs1200/ccs/tools/compiler/ti-cgt-arm_20.2.6.LTS/include/_ti_config.h
 main.obj: C:/ti/ccs1200/ccs/tools/compiler/ti-cgt-arm_20.2.6.LTS/include/linkage.h
@@ -15,7 +15,7 @@ main.obj: C:/ti/ccs1200/ccs/tools/compiler/ti-cgt-arm_20.2.6.LTS/include/sys/_st
 
 ../main.c:
 
-D:/1.Coding_/Tiva/SCB.h:
+../SCB.h:
 
 C:/ti/ccs1200/ccs/tools/compiler/ti-cgt-arm_20.2.6.LTS/include/stdint.h:
 
