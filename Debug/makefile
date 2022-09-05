@@ -10,6 +10,7 @@ GEN_OPTS__FLAG :=
 GEN_CMDS__FLAG := 
 
 ORDERED_OBJS += \
+"./NVIC.obj" \
 "./SCB.obj" \
 "./main.obj" \
 "./tm4c123gh6pm_startup_ccs.obj" \
@@ -156,8 +157,8 @@ driver001.hex: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(BIN_OUTPUTS__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "SCB.obj" "main.obj" "tm4c123gh6pm_startup_ccs.obj" 
-	-$(RM) "SCB.d" "main.d" "tm4c123gh6pm_startup_ccs.d" 
+	-$(RM) "NVIC.obj" "SCB.obj" "main.obj" "tm4c123gh6pm_startup_ccs.obj" 
+	-$(RM) "NVIC.d" "SCB.d" "main.d" "tm4c123gh6pm_startup_ccs.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 

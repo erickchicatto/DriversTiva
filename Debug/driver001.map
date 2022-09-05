@@ -1,17 +1,17 @@
 ******************************************************************************
                   TI ARM Linker PC v20.2.6                     
 ******************************************************************************
->> Linked Wed Aug 31 17:42:34 2022
+>> Linked Mon Sep  5 16:39:24 2022
 
 OUTPUT FILE NAME:   <driver001.out>
-ENTRY POINT SYMBOL: "_c_int00_noargs"  address: 00000bed
+ENTRY POINT SYMBOL: "_c_int00_noargs"  address: 00000b19
 
 
 MEMORY CONFIGURATION
 
          name            origin    length      used     unused   attr    fill
 ----------------------  --------  ---------  --------  --------  ----  --------
-  FLASH                 00000000   00040000  00000d16  0003f2ea  R  X
+  FLASH                 00000000   00040000  00000bb8  0003f448  R  X
   SRAM                  20000000   00008000  00000228  00007dd8  RW X
 
 
@@ -19,14 +19,13 @@ SEGMENT ALLOCATION MAP
 
 run origin  load origin   length   init length attrs members
 ----------  ----------- ---------- ----------- ----- -------
-00000000    00000000    00000d18   00000d18    r-x
+00000000    00000000    00000bbc   00000bbc    r-x
   00000000    00000000    0000026c   0000026c    r-- .intvecs
-  0000026c    0000026c    00000a7a   00000a7a    r-x .text
-  00000ce8    00000ce8    00000030   00000030    r-- .cinit
+  0000026c    0000026c    00000938   00000938    r-x .text
+  00000ba8    00000ba8    00000014   00000014    r-- .cinit
 20000000    20000000    00000228   00000000    rw-
   20000000    20000000    00000200   00000000    rw- .stack
-  20000200    20000200    00000020   00000000    rw- .bss
-  20000220    20000220    00000008   00000000    rw- .data
+  20000200    20000200    00000028   00000000    rw- .bss
 
 
 SECTION ALLOCATION MAP
@@ -37,43 +36,31 @@ section   page    origin      length       input sections
 .intvecs   0    00000000    0000026c     
                   00000000    0000026c     tm4c123gh6pm_startup_ccs.obj (.intvecs)
 
-.text      0    0000026c    00000a7a     
+.text      0    0000026c    00000938     
                   0000026c    000007bc     SCB.obj (.text)
-                  00000a28    0000009c     rtsv7M4_T_le_v4SPD16_eabi.lib : memcpy_t2.asm.obj (.text)
-                  00000ac4    0000007c     main.obj (.text)
-                  00000b40    00000068     rtsv7M4_T_le_v4SPD16_eabi.lib : copy_decompress_lzss.c.obj (.text:decompress:lzss:__TI_decompress_lzss)
-                  00000ba8    00000044                                   : autoinit.c.obj (.text:__TI_auto_init_nobinit_nopinit:__TI_auto_init_nobinit_nopinit)
-                  00000bec    00000034                                   : boot_cortex_m.c.obj (.text:_c_int00_noargs:_c_int00_noargs)
-                  00000c20    0000001c                                   : copy_zero_init.c.obj (.text:decompress:ZI:__TI_zero_init_nomemset:__TI_zero_init_nomemset)
-                  00000c3c    00000012     tm4c123gh6pm_startup_ccs.obj (.text)
-                  00000c4e    00000002     --HOLE-- [fill = 0]
-                  00000c50    00000010     SCB.obj (.text:SCB_BusFault__vEnable)
-                  00000c60    00000010     SCB.obj (.text:SCB_MemoryFault__vEnable)
-                  00000c70    00000010     SCB.obj (.text:SCB_UsageFault__vEnable)
-                  00000c80    00000010     SCB.obj (.text:SCB__vEnDIV0Trap)
-                  00000c90    00000010     SCB.obj (.text:SCB__vEnUnAlignTrap)
-                  00000ca0    00000010     SCB.obj (.text:SCB__vEnUnprivilegedSWTRIGGER)
-                  00000cb0    00000010     SCB.obj (.text:SCB__vEnableExceptions)
-                  00000cc0    00000010     SCB.obj (.text:SCB__vEnableTraps)
-                  00000cd0    0000000e     rtsv7M4_T_le_v4SPD16_eabi.lib : copy_decompress_none.c.obj (.text:decompress:none:__TI_decompress_none)
-                  00000cde    00000004                                   : pre_init.c.obj (.text:_system_pre_init)
-                  00000ce2    00000004                                   : exit.c.obj (.text:abort:abort)
+                  00000a28    00000060     main.obj (.text)
+                  00000a88    0000004c     NVIC.obj (.text:Enable_bits)
+                  00000ad4    00000044     rtsv7M4_T_le_v4SPD16_eabi.lib : autoinit.c.obj (.text:__TI_auto_init_nobinit_nopinit:__TI_auto_init_nobinit_nopinit)
+                  00000b18    00000034                                   : boot_cortex_m.c.obj (.text:_c_int00_noargs:_c_int00_noargs)
+                  00000b4c    0000001c                                   : copy_zero_init.c.obj (.text:decompress:ZI:__TI_zero_init_nomemset:__TI_zero_init_nomemset)
+                  00000b68    00000012     tm4c123gh6pm_startup_ccs.obj (.text)
+                  00000b7a    00000002     --HOLE-- [fill = 0]
+                  00000b7c    00000010     NVIC.obj (.text:Interrupt_Disable)
+                  00000b8c    00000010     NVIC.obj (.text:Interrupt_Enable)
+                  00000b9c    00000004     rtsv7M4_T_le_v4SPD16_eabi.lib : pre_init.c.obj (.text:_system_pre_init)
+                  00000ba0    00000004                                   : exit.c.obj (.text:abort:abort)
 
-.cinit     0    00000ce8    00000030     
-                  00000ce8    0000000c     (__TI_handler_table)
-                  00000cf4    0000000b     (.cinit..data.load) [load image, compression = lzss]
-                  00000cff    00000001     --HOLE-- [fill = 0]
-                  00000d00    00000008     (.cinit..bss.load) [load image, compression = zero_init]
-                  00000d08    00000010     (__TI_cinit_table)
+.cinit     0    00000ba8    00000014     
+                  00000ba8    00000008     (.cinit..bss.load) [load image, compression = zero_init]
+                  00000bb0    00000004     (__TI_handler_table)
+                  00000bb4    00000008     (__TI_cinit_table)
 
 .init_array 
 *          0    00000000    00000000     UNINITIALIZED
 
-.bss       0    20000200    00000020     UNINITIALIZED
+.bss       0    20000200    00000028     UNINITIALIZED
                   20000200    00000020     (.common:SCB_pu32Context)
-
-.data      0    20000220    00000008     UNINITIALIZED
-                  20000220    00000008     main.obj (.data)
+                  20000220    00000008     main.obj (.bss)
 
 .stack     0    20000000    00000200     UNINITIALIZED
                   20000000    00000004     rtsv7M4_T_le_v4SPD16_eabi.lib : boot_cortex_m.c.obj (.stack)
@@ -87,43 +74,38 @@ MODULE SUMMARY
        Module                         code   ro data   rw data
        ------                         ----   -------   -------
     .\
-       SCB.obj                        2108   0         32     
+       SCB.obj                        1980   0         32     
        tm4c123gh6pm_startup_ccs.obj   18     620       0      
-       main.obj                       124    0         8      
+       NVIC.obj                       108    0         0      
+       main.obj                       96     0         8      
     +--+------------------------------+------+---------+---------+
-       Total:                         2250   620       40     
+       Total:                         2202   620       40     
                                                               
     C:\ti\ccs1200\ccs\tools\compiler\ti-cgt-arm_20.2.6.LTS\lib\rtsv7M4_T_le_v4SPD16_eabi.lib
-       memcpy_t2.asm.obj              156    0         0      
-       copy_decompress_lzss.c.obj     104    0         0      
        autoinit.c.obj                 68     0         0      
        boot_cortex_m.c.obj            52     0         0      
        copy_zero_init.c.obj           28     0         0      
-       copy_decompress_none.c.obj     14     0         0      
        exit.c.obj                     4      0         0      
        pre_init.c.obj                 4      0         0      
     +--+------------------------------+------+---------+---------+
-       Total:                         430    0         0      
+       Total:                         156    0         0      
                                                               
        Stack:                         0      0         512    
-       Linker Generated:              0      47        0      
+       Linker Generated:              0      20        0      
     +--+------------------------------+------+---------+---------+
-       Grand Total:                   2680   667       552    
+       Grand Total:                   2358   640       552    
 
 
 LINKER GENERATED COPY TABLES
 
-__TI_cinit_table @ 00000d08 records: 2, size/record: 8, table size: 16
-	.data: load addr=00000cf4, load size=0000000b bytes, run addr=20000220, run size=00000008 bytes, compression=lzss
-	.bss: load addr=00000d00, load size=00000008 bytes, run addr=20000200, run size=00000020 bytes, compression=zero_init
+__TI_cinit_table @ 00000bb4 records: 1, size/record: 8, table size: 8
+	.bss: load addr=00000ba8, load size=00000008 bytes, run addr=20000200, run size=00000028 bytes, compression=zero_init
 
 
 LINKER GENERATED HANDLER TABLE
 
-__TI_handler_table @ 00000ce8 records: 3, size/record: 4, table size: 12
-	index: 0, handler: __TI_decompress_lzss
-	index: 1, handler: __TI_decompress_none
-	index: 2, handler: __TI_zero_init
+__TI_handler_table @ 00000bb0 records: 1, size/record: 4, table size: 4
+	index: 0, handler: __TI_zero_init
 
 
 GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name 
@@ -131,22 +113,23 @@ GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name
 address   name                          
 -------   ----                          
 00000881  BusFaultISR                   
-00000ce3  C$$EXIT                       
+00000ba1  C$$EXIT                       
+00000a89  Enable_bits                   
 00000989  HardFaultISR                  
+00000b7d  Interrupt_Disable             
+00000b8d  Interrupt_Enable              
 00000909  MemoryFaultISR                
 00000805  NMIISR                        
 00000807  PendSVISR                     
-00000c3d  ResetISR                      
+00000b69  ResetISR                      
 0000077b  SCB_BusFault__enGetPending    
 0000061d  SCB_BusFault__enGetPriority   
-00000c51  SCB_BusFault__vEnable         
 00000719  SCB_DEBUG__enGetPriority      
 000002c9  SCB_ISR__enGetPendingState    
 00000325  SCB_ISR__enGetVectorActive    
 000002f7  SCB_ISR__enGetVectorPending   
 000007a9  SCB_MemoryFault__enGetPending 
 0000064b  SCB_MemoryFault__enGetPriority
-00000c61  SCB_MemoryFault__vEnable      
 0000026d  SCB_PENDSV__enGetPending      
 000006eb  SCB_PENDSV__enGetPriority     
 0000074d  SCB_SVCall__enGetPending      
@@ -155,7 +138,6 @@ address   name
 000006bd  SCB_SysTick__enGetPriority    
 000007d7  SCB_UsageFault__enGetPending  
 000005ef  SCB_UsageFault__enGetPriority 
-00000c71  SCB_UsageFault__vEnable       
 000003e3  SCB__enGetPriorityGroup       
 00000545  SCB__enGetSLEEPONEXIT         
 000004cf  SCB__enGetSleepMode           
@@ -166,11 +148,6 @@ address   name
 00000487  SCB__enSetSleepMode           
 00000579  SCB__enSetStackAligment       
 00000411  SCB__enSetWakeUpSource        
-00000c81  SCB__vEnDIV0Trap              
-00000c91  SCB__vEnUnAlignTrap           
-00000ca1  SCB__vEnUnprivilegedSWTRIGGER 
-00000cb1  SCB__vEnableExceptions        
-00000cc1  SCB__vEnableTraps             
 20000200  SCB_pu32Context               
 000009b7  SVCallISR                     
 0000080d  UsageFaultISR                 
@@ -178,37 +155,33 @@ address   name
 20000200  __STACK_END                   
 00000200  __STACK_SIZE                  
 20000200  __STACK_TOP                   
-00000d08  __TI_CINIT_Base               
-00000d18  __TI_CINIT_Limit              
-00000ce8  __TI_Handler_Table_Base       
-00000cf4  __TI_Handler_Table_Limit      
-00000ba9  __TI_auto_init_nobinit_nopinit
-00000b41  __TI_decompress_lzss          
-00000cd1  __TI_decompress_none          
+00000bb4  __TI_CINIT_Base               
+00000bbc  __TI_CINIT_Limit              
+00000bb0  __TI_Handler_Table_Base       
+00000bb4  __TI_Handler_Table_Limit      
+00000ad5  __TI_auto_init_nobinit_nopinit
 ffffffff  __TI_pprof_out_hndl           
 ffffffff  __TI_prof_data_size           
 ffffffff  __TI_prof_data_start          
 00000000  __TI_static_base__            
-00000c21  __TI_zero_init_nomemset       
-00000a29  __aeabi_memcpy                
-00000a29  __aeabi_memcpy4               
-00000a29  __aeabi_memcpy8               
+00000b4d  __TI_zero_init_nomemset       
 ffffffff  __binit__                     
 ffffffff  __c_args__                    
 UNDEFED   __mpu_init                    
 20000000  __stack                       
 20000000  __start___llvm_prf_cnts       
 20000000  __stop___llvm_prf_cnts        
-00000bed  _c_int00_noargs               
+00000b19  _c_int00_noargs               
 UNDEFED   _system_post_cinit            
-00000cdf  _system_pre_init              
-00000ce3  abort                         
+00000b9d  _system_pre_init              
+00000ba1  abort                         
 ffffffff  binit                         
-20000220  current_state                 
 00000000  g_pfnVectors                  
-00000ac5  main                          
-00000a29  memcpy                        
-00000b0b  state_machine_init            
+00000a29  main                          
+00000a51  state_a_function              
+00000a61  state_b_function              
+00000a71  state_c_function              
+00000a43  state_machine_init            
 
 
 GLOBAL SYMBOLS: SORTED BY Symbol Address 
@@ -252,40 +225,31 @@ address   name
 00000989  HardFaultISR                  
 000009b7  SVCallISR                     
 000009b9  WriteRegister                 
-00000a29  __aeabi_memcpy                
-00000a29  __aeabi_memcpy4               
-00000a29  __aeabi_memcpy8               
-00000a29  memcpy                        
-00000ac5  main                          
-00000b0b  state_machine_init            
-00000b41  __TI_decompress_lzss          
-00000ba9  __TI_auto_init_nobinit_nopinit
-00000bed  _c_int00_noargs               
-00000c21  __TI_zero_init_nomemset       
-00000c3d  ResetISR                      
-00000c51  SCB_BusFault__vEnable         
-00000c61  SCB_MemoryFault__vEnable      
-00000c71  SCB_UsageFault__vEnable       
-00000c81  SCB__vEnDIV0Trap              
-00000c91  SCB__vEnUnAlignTrap           
-00000ca1  SCB__vEnUnprivilegedSWTRIGGER 
-00000cb1  SCB__vEnableExceptions        
-00000cc1  SCB__vEnableTraps             
-00000cd1  __TI_decompress_none          
-00000cdf  _system_pre_init              
-00000ce3  C$$EXIT                       
-00000ce3  abort                         
-00000ce8  __TI_Handler_Table_Base       
-00000cf4  __TI_Handler_Table_Limit      
-00000d08  __TI_CINIT_Base               
-00000d18  __TI_CINIT_Limit              
+00000a29  main                          
+00000a43  state_machine_init            
+00000a51  state_a_function              
+00000a61  state_b_function              
+00000a71  state_c_function              
+00000a89  Enable_bits                   
+00000ad5  __TI_auto_init_nobinit_nopinit
+00000b19  _c_int00_noargs               
+00000b4d  __TI_zero_init_nomemset       
+00000b69  ResetISR                      
+00000b7d  Interrupt_Disable             
+00000b8d  Interrupt_Enable              
+00000b9d  _system_pre_init              
+00000ba1  C$$EXIT                       
+00000ba1  abort                         
+00000bb0  __TI_Handler_Table_Base       
+00000bb4  __TI_CINIT_Base               
+00000bb4  __TI_Handler_Table_Limit      
+00000bbc  __TI_CINIT_Limit              
 20000000  __stack                       
 20000000  __start___llvm_prf_cnts       
 20000000  __stop___llvm_prf_cnts        
 20000200  SCB_pu32Context               
 20000200  __STACK_END                   
 20000200  __STACK_TOP                   
-20000220  current_state                 
 ffffffff  __TI_pprof_out_hndl           
 ffffffff  __TI_prof_data_size           
 ffffffff  __TI_prof_data_start          
@@ -295,4 +259,4 @@ ffffffff  binit
 UNDEFED   __mpu_init                    
 UNDEFED   _system_post_cinit            
 
-[79 symbols]
+[70 symbols]

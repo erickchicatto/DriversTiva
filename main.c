@@ -2,6 +2,7 @@
 /// brief : just for practice driver coding
 
 #include "SCB.h"
+#include "NVIC.h"
 #include <stdint.h>
 
 ///@startuml
@@ -32,22 +33,22 @@ static void(*state_table[])(void)={
 };
 
 static State_type current_state;
-static int ;
+static int clock;
 
 
 int main(void){
 
-    volatile int number1=0;
-    volatile int number2=0;
+    //volatile int number1=0;
+    //volatile int number2=0;
 
-    float fnumber1=0.1;
-    float fnumber2=0.2;
+    //float fnumber1=0.1;
+    //float fnumber2=0.2;
 
     //SCB__vReqSysReset();
-    SCB__vEnableTraps();
-    SCB__vEnableExceptions();
-    SCB__enSetPriorityGroup(SCB_enPRIGROUP_XXX);
-    SCB__enSetStackAligment(SCB_enALIGN_4BYTE);
+    //SCB__vEnableTraps();
+    //SCB__vEnableExceptions();
+    //SCB__enSetPriorityGroup(SCB_enPRIGROUP_XXX);
+    //SCB__enSetStackAligment(SCB_enALIGN_4BYTE);
 
     //example 1 NMI
     //SCB_NMI__vSetPending();
@@ -65,14 +66,20 @@ int main(void){
     //(*((volatile uint32_t *)(SCB_BASE+SCB_FAULTSTAT_OFFSET+1)))=number2;
 
     //example 6 UsageFault NOCP
-    (*((volatile uint32_t*)((0xE000E000)+(0x0D88))))=0; //FPU Coprocessor disable
-    fnumber1*=fnumber2;
+    //(*((volatile uint32_t*)((0xE000E000)+(0x0D88))))=0; //FPU Coprocessor disable
+    //fnumber1*=fnumber2;
 
-    //
+    /*
     while(1){
       state_table[current_state]();
       clock++;
-    }
+    }*/
+
+    Interrupt_Enable();
+    Interrupt_Disable();
+    Enable_bits(1);
+    Enable_bits(2);
+
 
 }
 
@@ -86,7 +93,7 @@ void state_machine_init(void){
 
 void state_a_function(void){
 
-    if(clock==2){
+    if(clock==1){
         current_state = STATE_B;
     }
 
@@ -94,7 +101,7 @@ void state_a_function(void){
 
 void state_b_function(void){
 
-    if(clock==5){
+    if(clock==2){
        current_state = STATE_C;
     }
 }
