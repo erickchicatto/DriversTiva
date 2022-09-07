@@ -108,14 +108,46 @@ typedef struct{
 #define NVIC_Set_Disable_EN0     ((Set_Disable_EN0*)(NVIC_TOTAL_Disable_EN0))
 #define NVIC_Set_Disable_EN0_R   (*((volatile uint32_t*) (NVIC_TOTAL_Disable_EN0)))
 
+//Register for priority PRI0
+typedef enum{
+  INTA1  = 1,
+  INTA2  = 2,
+  INTA3  = 3,
+  INTB1  = 4,
+  INTB2  = 5,
+  INTB3  = 6,
+  INTC1  = 7,
+  INTC2  = 8,
+  INTC3  = 9,
+  INTD1  = 10,
+  INTD2  = 11,
+  INTD3  = 12,
+}NVIC_PRI0;
+
+typedef struct {
+   volatile const reserved:5;
+   volatile uint32_t INTA:3;
+   volatile const reserved2:5;
+   volatile uint32_t INTB:3;
+   volatile const reserved3:5;
+   volatile uint32_t INTC:3;
+   volatile const reserved4:5;
+   volatile uint32_t INTD:3;
+}Set_PRI0;
+
+#define NVIC_OFFSET_PRI0         0x400
+#define NVIC_TOTAL_PRI0          (NVIC_BASE)+(NVIC_OFFSET_PRI0)
+// For access to the register in individual bits
+#define NVIC_PRI0_   ((Set_PRI0*)(NVIC_TOTAL_PRI0))
+// For access to the registers in all bits
+#define NVIC_PRI0_R (*((volatile uint32_t*) (NVIC_TOTAL_PRI0 )))
 
 ///Functions
-
 inline void Interrupt_Enable(void);
 inline void Interrupt_Disable(void);
 inline void Enable_bits(uint32_t bit);
-
-
+inline void Enable_Bits_For_PRI0(NVIC_PRI0 bit);
+inline void Disable_Off_Registers_PRI0(uint32_t bit);
 
 
 #endif /* NVIC_H_ */

@@ -75,10 +75,21 @@ int main(void){
       clock++;
     }*/
 
+
+    //This is for the NVIC Memory examples
+
     Interrupt_Enable();
     Interrupt_Disable();
     Enable_bits(1);
     Enable_bits(2);
+
+    //
+    Enable_Bits_For_PRI0(INTA1);
+    Enable_Bits_For_PRI0(INTA2);
+    Enable_Bits_For_PRI0(INTA3);
+
+    // for disable registers PRI0
+    Disable_Off_Registers_PRI0(2u);
 
 
 }
